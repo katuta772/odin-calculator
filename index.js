@@ -1,7 +1,9 @@
 let firstNumber = 0;
 let secondNumber = 0;
+let value = 0;
 let operator = "";
 let changeNumber = false;
+canContinue = false;
 let length = 1;
 
 const button1 = document.getElementById("1");
@@ -88,7 +90,7 @@ buttonC.addEventListener("click", function () {
 const operationBox = document.getElementById("operation-box");
 
 function populateFirstNumber(input) {
-  if (changeNumber == false) {
+  if (changeNumber == false && canContinue == false) {
     if (length === 1) {
       firstNumber += input;
       operationBox.textContent += input;
@@ -146,22 +148,23 @@ function calculate(firstNumber, operator, secondNumber) {
   switch (operator) {
     case "+":
       value = firstNumber + secondNumber;
-      operationBox.textContent = `= ${value}`;
+      operationBox.textContent = `= ${value} `;
       break;
     case "-":
       value = firstNumber - secondNumber;
-      operationBox.textContent = `= ${value}`;
+      operationBox.textContent = `= ${value} `;
       break;
     case "x":
       value = firstNumber * secondNumber;
-      operationBox.textContent = `= ${value}`;
+      operationBox.textContent = `= ${value} `;
       break;
     case "/":
       value = firstNumber / secondNumber;
-      operationBox.textContent = `= ${value}`;
+      operationBox.textContent = `= ${value} `;
       break;
   }
   length = 1;
+  console.log(value);
 }
 
 function clearDisplay() {
