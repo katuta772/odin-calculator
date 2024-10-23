@@ -1,7 +1,8 @@
 let firstNumber = 0;
 let secondNumber = 0;
-let operator = '';
+let operator = "";
 let changeNumber = false;
+let length = 1;
 
 const button1 = document.getElementById("1");
 const button2 = document.getElementById("2");
@@ -81,16 +82,33 @@ buttonEqual.addEventListener("click", function () {
   calculate(firstNumber, operator, secondNumber);
 });
 buttonC.addEventListener("click", function () {
-    clearDisplay();
-  });
+  clearDisplay();
+});
 
 const operationBox = document.getElementById("operation-box");
 
 function populateFirstNumber(input) {
   if (changeNumber == false) {
-    firstNumber += input;
-    operationBox.textContent += input;
-  } else populateSecondNumber(input);
+    if (length === 1) {
+      firstNumber += input;
+      operationBox.textContent += input;
+      length += 1;
+    } else if (length === 2) {
+      firstNumber = firstNumber * 10 + input;
+      operationBox.textContent += input;
+      length += 1;
+    } else if (length === 3) {
+      firstNumber = firstNumber * 10 + input;
+      operationBox.textContent += input;
+      length += 1;
+    } else if (length === 4) {
+      firstNumber = firstNumber * 10 + input;
+      operationBox.textContent += input;
+      length += 1;
+    }
+  } else {
+    populateSecondNumber(input);
+  }
 }
 
 function setOperator(input) {
@@ -98,18 +116,33 @@ function setOperator(input) {
     operator = input;
     operationBox.textContent += input;
     changeNumber = true;
+    length = 1;
   }
 }
 
 function populateSecondNumber(input) {
   if (changeNumber == true) {
-    secondNumber += input;
-    operationBox.textContent += input;
+    if (length === 1) {
+      secondNumber += input;
+      operationBox.textContent += input;
+      length += 1;
+    } else if (length === 2) {
+      secondNumber = secondNumber * 10 + input;
+      operationBox.textContent += input;
+      length += 1;
+    } else if (length === 3) {
+      secondNumber = secondNumber * 10 + input;
+      operationBox.textContent += input;
+      length += 1;
+    } else if (length === 4) {
+      secondNumber = secondNumber * 10 + input;
+      operationBox.textContent += input;
+      length += 1;
+    }
   }
 }
 
 function calculate(firstNumber, operator, secondNumber) {
-  
   switch (operator) {
     case "+":
       value = firstNumber + secondNumber;
@@ -128,12 +161,13 @@ function calculate(firstNumber, operator, secondNumber) {
       operationBox.textContent = `= ${value}`;
       break;
   }
+  length = 1;
 }
 
-function clearDisplay(){
-    operationBox.textContent = "";
-    changeNumber = false;
-    firstNumber = 0;
-    secondNumber = 0;
-    operator = '';
+function clearDisplay() {
+  operationBox.textContent = "";
+  changeNumber = false;
+  firstNumber = 0;
+  secondNumber = 0;
+  operator = "";
 }
