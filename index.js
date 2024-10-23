@@ -1,6 +1,6 @@
-let firstNumber;
-let secondNumber;
-let operator;
+let firstNumber = 0;
+let secondNumber = 0;
+let operator = '';
 let changeNumber = false;
 
 const button1 = document.getElementById("1");
@@ -15,49 +15,71 @@ const button9 = document.getElementById("9");
 const button0 = document.getElementById("0");
 const buttonC = document.getElementById("0");
 const buttonEqual = document.getElementById("=");
-const buttonPlus = document.getElementById("=");
+const buttonPlus = document.getElementById("+");
 const buttonMinus = document.getElementById("-");
+const buttonMultiply = document.getElementById("x");
 const buttonDivide = document.getElementById("/");
 
-button1.addEventListener("click", function(){
-    const input = 1;
-    populateFirstNumber(input);
+button1.addEventListener("click", function () {
+  const input = 1;
+  populateFirstNumber(input);
 });
-button2.addEventListener("click", function(){
-    const input = 2;
-    populateFirstNumber(input);
+button2.addEventListener("click", function () {
+  const input = 2;
+  populateFirstNumber(input);
 });
-button3.addEventListener("click", function(){
-    const input = 3;
-    populateFirstNumber(input);
+button3.addEventListener("click", function () {
+  const input = 3;
+  populateFirstNumber(input);
 });
-button4.addEventListener("click", function(){
-    const input = 4;
-    populateFirstNumber(input);
+button4.addEventListener("click", function () {
+  const input = 4;
+  populateFirstNumber(input);
 });
-button5.addEventListener("click", function(){
-    const input = 5;
-    populateFirstNumber(input);
+button5.addEventListener("click", function () {
+  const input = 5;
+  populateFirstNumber(input);
 });
-button6.addEventListener("click", function(){
-    const input = 6;
-    populateFirstNumber(input);
+button6.addEventListener("click", function () {
+  const input = 6;
+  populateFirstNumber(input);
 });
-button7.addEventListener("click", function(){
-    const input = 7;
-    populateFirstNumber(input);
+button7.addEventListener("click", function () {
+  const input = 7;
+  populateFirstNumber(input);
 });
-button8.addEventListener("click", function(){
-    const input = 8;
-    populateFirstNumber(input);
+button8.addEventListener("click", function () {
+  const input = 8;
+  populateFirstNumber(input);
 });
-button9.addEventListener("click", function(){
-    const input = 9;
-    populateFirstNumber(input);
+button9.addEventListener("click", function () {
+  const input = 9;
+  populateFirstNumber(input);
 });
-button0.addEventListener("click", function(){
-    const input = 0;
-    populateFirstNumber(input);
+button0.addEventListener("click", function () {
+  const input = 0;
+  populateFirstNumber(input);
+});
+
+buttonPlus.addEventListener("click", function () {
+  const input = "+";
+  setOperator(input);
+});
+buttonMinus.addEventListener("click", function () {
+  const input = "-";
+  setOperator(input);
+});
+buttonMultiply.addEventListener("click", function () {
+  const input = "x";
+  setOperator(input);
+});
+buttonDivide.addEventListener("click", function () {
+  const input = "/";
+  setOperator(input);
+});
+
+buttonEqual.addEventListener("click", function () {
+  calculate(firstNumber, operator, secondNumber);
 });
 
 const operationBox = document.getElementById("operation-box");
@@ -69,25 +91,39 @@ function populateFirstNumber(input) {
   } else populateSecondNumber(input);
 }
 
-function populateSecondNumber(input) {
+function setOperator(input) {
   if (changeNumber == false) {
+    operator = input;
+    operationBox.textContent += input;
+    changeNumber = true;
+  }
+}
+
+function populateSecondNumber(input) {
+  if (changeNumber == true) {
     secondNumber += input;
+    operationBox.textContent += input;
   }
 }
 
 function calculate(firstNumber, operator, secondNumber) {
+  
   switch (operator) {
     case "+":
-      return firstNumber + secondNumber;
+      value = firstNumber + secondNumber;
+      operationBox.textContent = `= ${value}`;
       break;
     case "-":
-      return firstNumber - secondNumber;
+      value = firstNumber - secondNumber;
+      operationBox.textContent = `= ${value}`;
       break;
     case "x":
-      return firstNumber * secondNumber;
+      value = firstNumber * secondNumber;
+      operationBox.textContent = `= ${value}`;
       break;
     case "/":
-      return firstNumber / secondNumber;
+      value = firstNumber / secondNumber;
+      operationBox.textContent = `= ${value}`;
       break;
   }
 }
