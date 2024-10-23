@@ -1,3 +1,4 @@
+// global variables
 let firstNumber = 0;
 let secondNumber = 0;
 let value = 0;
@@ -5,7 +6,9 @@ let operator = "";
 let changeNumber = false;
 let newEquation = true;
 let length = 1;
+const operationBox = document.getElementById("operation-box");
 
+// button elements
 const button1 = document.getElementById("1");
 const button2 = document.getElementById("2");
 const button3 = document.getElementById("3");
@@ -23,6 +26,7 @@ const buttonMinus = document.getElementById("-");
 const buttonMultiply = document.getElementById("x");
 const buttonDivide = document.getElementById("/");
 
+// click events
 button1.addEventListener("click", function () {
   const input = 1;
   populateFirstNumber(input);
@@ -87,8 +91,7 @@ buttonC.addEventListener("click", function () {
   clearDisplay();
 });
 
-const operationBox = document.getElementById("operation-box");
-
+// functions
 function populateFirstNumber(input) {
   if (changeNumber == false && newEquation == true) {
     if (length === 1) {
