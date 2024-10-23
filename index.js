@@ -13,7 +13,7 @@ const button7 = document.getElementById("7");
 const button8 = document.getElementById("8");
 const button9 = document.getElementById("9");
 const button0 = document.getElementById("0");
-const buttonC = document.getElementById("0");
+const buttonC = document.getElementById("C");
 const buttonEqual = document.getElementById("=");
 const buttonPlus = document.getElementById("+");
 const buttonMinus = document.getElementById("-");
@@ -77,10 +77,12 @@ buttonDivide.addEventListener("click", function () {
   const input = "/";
   setOperator(input);
 });
-
 buttonEqual.addEventListener("click", function () {
   calculate(firstNumber, operator, secondNumber);
 });
+buttonC.addEventListener("click", function () {
+    clearDisplay();
+  });
 
 const operationBox = document.getElementById("operation-box");
 
@@ -126,4 +128,12 @@ function calculate(firstNumber, operator, secondNumber) {
       operationBox.textContent = `= ${value}`;
       break;
   }
+}
+
+function clearDisplay(){
+    operationBox.textContent = "";
+    changeNumber = false;
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = '';
 }
