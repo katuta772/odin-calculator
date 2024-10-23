@@ -3,7 +3,7 @@ let secondNumber = 0;
 let value = 0;
 let operator = "";
 let changeNumber = false;
-canContinue = false;
+let newEquation = true;
 let length = 1;
 
 const button1 = document.getElementById("1");
@@ -90,9 +90,9 @@ buttonC.addEventListener("click", function () {
 const operationBox = document.getElementById("operation-box");
 
 function populateFirstNumber(input) {
-  if (changeNumber == false && canContinue == false) {
+  if (changeNumber == false && newEquation == true) {
     if (length === 1) {
-      firstNumber += input;
+      firstNumber = input;
       operationBox.textContent += input;
       length += 1;
     } else if (length === 2) {
@@ -110,22 +110,29 @@ function populateFirstNumber(input) {
     }
   } else {
     populateSecondNumber(input);
+    newEquation = false;
   }
 }
 
 function setOperator(input) {
-  if (changeNumber == false) {
-    operator = input;
-    operationBox.textContent += input;
-    changeNumber = true;
-    length = 1;
+    if (!changeNumber) {
+      operator = input;
+      operationBox.textContent += input;
+      changeNumber = true;
+      length = 1;
+  
+      if (!newEquation) {
+        firstNumber = value;  
+        newEquation = true;
+      }
+    }
   }
-}
+  
 
 function populateSecondNumber(input) {
   if (changeNumber == true) {
     if (length === 1) {
-      secondNumber += input;
+      secondNumber = input;
       operationBox.textContent += input;
       length += 1;
     } else if (length === 2) {
@@ -145,32 +152,41 @@ function populateSecondNumber(input) {
 }
 
 function calculate(firstNumber, operator, secondNumber) {
-  switch (operator) {
-    case "+":
-      value = firstNumber + secondNumber;
-      operationBox.textContent = `= ${value} `;
-      break;
-    case "-":
-      value = firstNumber - secondNumber;
-      operationBox.textContent = `= ${value} `;
-      break;
-    case "x":
-      value = firstNumber * secondNumber;
-      operationBox.textContent = `= ${value} `;
-      break;
-    case "/":
-      value = firstNumber / secondNumber;
-      operationBox.textContent = `= ${value} `;
-      break;
+    switch (operator) {
+      case "+":
+        value = firstNumber + secondNumber;
+        break;
+      case "-":
+        value = firstNumber - secondNumber;
+        break;
+      case "x":
+        value = firstNumber * secondNumber;
+        break;
+      case "/":
+        value = firstNumber / secondNumber;
+        break;
+    }
+  
+    operationBox.textContent = `= ${value} `;
+    console.log(`${firstNumber} ${operator} ${secondNumber} = ${value}`);
+  
+    firstNumber = value;
+  
+    secondNumber = 0;
+    
+    length = 1;
+    changeNumber = false;
+  
+    newEquation = false;
   }
-  length = 1;
-  console.log(value);
-}
 
 function clearDisplay() {
-  operationBox.textContent = "";
-  changeNumber = false;
-  firstNumber = 0;
-  secondNumber = 0;
-  operator = "";
+    operationBox.textContent = "";
+    changeNumber = false;
+    newEquation = true; 
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "";
+    value = 0;  
+    length = 1;
 }
